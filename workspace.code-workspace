@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.inc": "c",
+			"mainpage.h": "c",
+			"includes.h": "c",
+			"screenshot.h": "c",
+			"boot.h": "c",
+			"touch_process.h": "c",
+			"list_item.h": "c",
+			"robobendmainpage.h": "c",
+			"gui.h": "c"
+		}
+	}
+}
