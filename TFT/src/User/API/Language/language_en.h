@@ -352,4 +352,13 @@
     #define STRING_HEAT_HOTEND            "Heat hotend to %d℃?"
     #define STRING_Z_ALIGN                "Z Align"
 
+    // Robobend
+    #define STRING_ROBOBEND               "Robobend"
+    #define STRING_ROBOBEND_PRODUCE       "Produce"
+    #define STRING_ROBOBEND_INSERT        "Insert wire"
+    #define STRING_ROBOBEND_INSERT_POPUP  "Insert wire?"
+    #define STRING_ROBOBEND_REMOVE        "Remove wire"
+    #define STRING_ROBOBEND_REMOVE_POPUP  "Remove wire?"
+    #define STRING_ROBOBEND_PARAMETERS    "Parameters"
+    #define STRING_ROBOBEND_HELP          "Help"
 #endif

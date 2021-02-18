@@ -7,6 +7,9 @@ extern "C" {
 
 void menuMain(void);
 
+void insertWire(void);
+void removeWire(void);
+
 #ifdef __cplusplus
 }
 #endif

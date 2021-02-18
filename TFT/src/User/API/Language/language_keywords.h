@@ -359,6 +359,16 @@ extern "C" {
 #define LANG_KEY_HEAT_HOTEND                  "label_heat_hotend:"
 #define LANG_KEY_Z_ALIGN                      "label_z_align:"
 
+// Robobend
+#define LANG_KEY_ROBOBEND                     "label_robobend:"
+#define LANG_KEY_ROBOBEND_PRODUCE             "label_robobend_produce:"
+#define LANG_KEY_ROBOBEND_INSERT              "label_robobend_insert:"
+#define LANG_KEY_ROBOBEND_INSERT_POPUP        "label_robobend_insert_popup:"
+#define LANG_KEY_ROBOBEND_REMOVE              "label_robobend_remove:"
+#define LANG_KEY_ROBOBEND_REMOVE_POPUP        "label_robobend_remove_popup:"
+#define LANG_KEY_ROBOBEND_PARAMETERS          "label_robobend_parameters:"
+#define LANG_KEY_ROBOBEND_HELP                "label_robobend_help:"
+
 #ifdef __cplusplus
 }
 #endif

@@ -352,4 +352,13 @@
     #define STRING_HEAT_HOTEND            "Chauffer la buse à %d℃ ?"
     #define STRING_Z_ALIGN                "Z Align"
 
+    // Robobend
+    #define STRING_ROBOBEND               "Robobend"
+    #define STRING_ROBOBEND_PRODUCE       "Fabriquer"
+    #define STRING_ROBOBEND_INSERT        "Insérer fil"
+    #define STRING_ROBOBEND_INSERT_POPUP  "Procéder au chargement du fil ?"
+    #define STRING_ROBOBEND_REMOVE        "Retirer fil"
+    #define STRING_ROBOBEND_REMOVE_POPUP  "Retirer le fil ?"
+    #define STRING_ROBOBEND_PARAMETERS    "Paramètres"
+    #define STRING_ROBOBEND_HELP          "Aide"
 #endif
