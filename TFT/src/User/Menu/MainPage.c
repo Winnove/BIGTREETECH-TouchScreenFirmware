@@ -4,7 +4,7 @@
 char * _rbPopupMessage = "PLACEHOLDER";
 FP_MENU _rbPopupNextMenu;
 
-void menuMain(void)
+void menuMain2(void)
 {
   // 1 title, ITEM_PER_PAGE items(icon+label)
   MENUITEMS mainPageItems = {
@@ -60,6 +60,76 @@ void menuMain(void)
 
       case KEY_ICON_7:   
         //infoMenu.menu[++infoMenu.cur] = menuSettings;     
+        break;
+
+      default:
+        break;
+    }
+
+    loopProcess();
+  }
+}
+
+void menuMain(void)
+{
+  GUI_Clear(infoSettings.bg_color);
+  GUI_SetTextMode(GUI_TEXTMODE_TRANS);
+  GUI_SetColor(BLACK);
+
+  uint cellWidth = LCD_WIDTH / 3;
+  uint cellHeight = LCD_HEIGHT / 2;
+  uint offsetWidth = (cellWidth - ICON_WIDTH) / 2;
+  uint offsetHeight = (cellHeight - ICON_HEIGHT) / 2;
+
+  GUI_RECT btnProduceRect = {offsetWidth, offsetHeight, offsetWidth+ICON_WIDTH, offsetHeight+ICON_HEIGHT};
+  GUI_RECT btnInsertRect = {offsetWidth+cellWidth, offsetHeight, offsetWidth+cellWidth+ICON_WIDTH, offsetHeight+ICON_HEIGHT};
+  GUI_RECT btnRemoveRect = {offsetWidth+cellWidth*2, offsetHeight, offsetWidth+cellWidth*2+ICON_WIDTH, offsetHeight+ICON_HEIGHT};
+
+  GUI_RECT btnHelpRect = {offsetWidth*2+cellWidth, offsetHeight+cellHeight, offsetWidth*2+cellWidth+ICON_WIDTH, offsetHeight+cellHeight+ICON_HEIGHT};
+  GUI_RECT btnParametersRect = {offsetWidth+cellWidth*2, offsetHeight+cellHeight, offsetWidth+cellWidth*2+ICON_WIDTH, offsetHeight+cellHeight+ICON_HEIGHT};
+
+  ICON_ReadDisplay(btnProduceRect.x0, btnProduceRect.y0, ICON_RB_PRODUCE);
+  ICON_ReadDisplay(btnInsertRect.x0, btnInsertRect.y0, ICON_RB_INSERT_WIRE);
+  ICON_ReadDisplay(btnRemoveRect.x0, btnRemoveRect.y0, ICON_RB_REMOVE_WIRE);
+  ICON_ReadDisplay(btnHelpRect.x0, btnHelpRect.y0, ICON_RB_HELP);
+  ICON_ReadDisplay(btnParametersRect.x0, btnParametersRect.y0, ICON_RB_PARAMETERS);
+
+  // Logo size: 152 x 22
+  ICON_ReadDisplay(30, cellHeight + (cellHeight - 22) / 2, ICON_RB_ROBOBEND);
+  
+
+  const GUI_RECT btnRect[] = { btnProduceRect, btnInsertRect, btnRemoveRect, btnHelpRect, btnParametersRect };
+
+  while (infoMenu.menu[infoMenu.cur] == menuMain)
+  {
+    uint16_t key_num = KEY_GetValue(5, btnRect);
+    switch (key_num)
+    {
+      // Produce.
+      case 0:   
+        infoMenu.menu[++infoMenu.cur] = menuPrint;          
+        break;
+
+      // Insert.
+      case 1:
+        _rbPopupMessage = "Procéder au chargement du fil ?";
+        _rbPopupNextMenu = menuInsertWire;
+        infoMenu.menu[++infoMenu.cur] = popupValidation;      
+        break;
+
+      // Remove.
+      case 2:
+          _rbPopupMessage = "Retirer le fil ?";
+          _rbPopupNextMenu = menuRemoveWire;
+          infoMenu.menu[++infoMenu.cur] = popupValidation;       
+        break;
+
+      // Help.
+      case 3:        
+        break;
+
+      // Parameters.
+      case 4:        
         break;
 
       default:
