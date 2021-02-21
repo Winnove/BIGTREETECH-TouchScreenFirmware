@@ -7,8 +7,16 @@ extern "C" {
 
 void menuMain(void);
 
+
+void popupValidation();
+
 void insertWire(void);
 void removeWire(void);
+
+void menuInsertWire(void);
+void menuRemoveWire(void);
+
+void menuHelp(void);
 
 #ifdef __cplusplus
 }

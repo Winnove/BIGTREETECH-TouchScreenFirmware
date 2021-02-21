@@ -314,6 +314,13 @@ void menuPrintFromSource(void)
 
 void menuPrint(void)
 {
+  // Go to SD page directly.
+  list_mode = infoSettings.file_listmode; //follow list mode setting in TFT sd card
+  infoFile.source = TFT_SD;
+  infoMenu.menu[++infoMenu.cur] = menuPrintFromSource;
+  infoMenu.menu[++infoMenu.cur] = menuPowerOff;
+  goto selectEnd;
+  
   KEY_VALUES  key_num;
 
   MENUITEMS sourceSelItems = {

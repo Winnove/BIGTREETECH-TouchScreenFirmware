@@ -6,7 +6,6 @@
 * Description: https://en.wikipedia.org/wiki/X_Macro
 */
 //after changing/adding/removing an icon, change the ICON_FLASH_SIGN in Settings.h
-
 X_ICON (HEAT)
 X_ICON (MOVE)
 X_ICON (HOME)
@@ -145,10 +144,11 @@ X_ICON (Z_ALIGN)
 X_ICON (MESH_EDITOR)
 
 // Robobend
-X_ICON (ROBOBEND_PRODUCE)
-X_ICON (ROBOBEND_INSERT)
-X_ICON (ROBOBEND_REMOVE)
-X_ICON (ROBOBEND_PARAMETERS)
-X_ICON (ROBOBEND_HELP)
+X_ICON (RB_PRODUCE)
+X_ICON (RB_INSERT_WIRE)
+X_ICON (RB_REMOVE_WIRE)
+X_ICON (RB_PARAMETERS)
+X_ICON (RB_HELP)
+X_ICON (OK)
 
 //after changing/adding/removing an icon, change the ICON_FLASH_SIGN in Settings.h

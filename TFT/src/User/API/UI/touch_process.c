@@ -187,16 +187,16 @@ u16 KEY_GetValue(u8 total_rect,const GUI_RECT* menuRect)
     {
       key_num = Key_value(total_rect, menuRect);
       firstPress = false;
-      if(TSC_ReDrawIcon)
-        TSC_ReDrawIcon(key_num, 1);
+     // if(TSC_ReDrawIcon)
+     //  TSC_ReDrawIcon(key_num, 1);
     }
   }
   else
   {
     if (firstPress == false )
     {
-      if(TSC_ReDrawIcon)
-        TSC_ReDrawIcon(key_num, 0);
+    //  if(TSC_ReDrawIcon)
+    //    TSC_ReDrawIcon(key_num, 0);
       key_return = key_num;
       key_num = IDLE_TOUCH;
       firstPress = true;

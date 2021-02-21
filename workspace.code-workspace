@@ -14,7 +14,11 @@
 			"touch_process.h": "c",
 			"list_item.h": "c",
 			"robobendmainpage.h": "c",
-			"gui.h": "c"
+			"gui.h": "c",
+			"notification.h": "c",
+			"menu.h": "c",
+			"my_misc.h": "c",
+			"popup.h": "c"
 		}
 	}
 }
