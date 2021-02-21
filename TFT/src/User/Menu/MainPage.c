@@ -74,20 +74,21 @@ void menuMain(void)
 {
   GUI_Clear(infoSettings.bg_color);
   GUI_SetTextMode(GUI_TEXTMODE_TRANS);
-  GUI_SetColor(BLACK);
+  GUI_SetColor(WHITE);
 
   uint cellWidth = LCD_WIDTH / 3;
   uint cellHeight = LCD_HEIGHT / 2;
   uint offsetWidth = (cellWidth - ICON_WIDTH) / 2;
   uint offsetHeight = (cellHeight - ICON_HEIGHT) / 2;
 
-  GUI_RECT btnProduceRect = {offsetWidth, offsetHeight, offsetWidth+ICON_WIDTH, offsetHeight+ICON_HEIGHT};
-  GUI_RECT btnInsertRect = {offsetWidth+cellWidth, offsetHeight, offsetWidth+cellWidth+ICON_WIDTH, offsetHeight+ICON_HEIGHT};
-  GUI_RECT btnRemoveRect = {offsetWidth+cellWidth*2, offsetHeight, offsetWidth+cellWidth*2+ICON_WIDTH, offsetHeight+ICON_HEIGHT};
+  GUI_RECT btnProduceRect = {offsetWidth, offsetHeight, offsetWidth+ICON_WIDTH, offsetHeight+ICON_HEIGHT+BYTE_HEIGHT};
+  GUI_RECT btnInsertRect = {offsetWidth+cellWidth, offsetHeight, offsetWidth+cellWidth+ICON_WIDTH, offsetHeight+ICON_HEIGHT+BYTE_HEIGHT};
+  GUI_RECT btnRemoveRect = {offsetWidth+cellWidth*2, offsetHeight, offsetWidth+cellWidth*2+ICON_WIDTH, offsetHeight+ICON_HEIGHT+BYTE_HEIGHT};
 
   GUI_RECT btnHelpRect = {offsetWidth*2+cellWidth, offsetHeight+cellHeight, offsetWidth*2+cellWidth+ICON_WIDTH, offsetHeight+cellHeight+ICON_HEIGHT};
   GUI_RECT btnParametersRect = {offsetWidth+cellWidth*2, offsetHeight+cellHeight, offsetWidth+cellWidth*2+ICON_WIDTH, offsetHeight+cellHeight+ICON_HEIGHT};
 
+  // Icons.
   ICON_ReadDisplay(btnProduceRect.x0, btnProduceRect.y0, ICON_RB_PRODUCE);
   ICON_ReadDisplay(btnInsertRect.x0, btnInsertRect.y0, ICON_RB_INSERT_WIRE);
   ICON_ReadDisplay(btnRemoveRect.x0, btnRemoveRect.y0, ICON_RB_REMOVE_WIRE);
@@ -97,6 +98,10 @@ void menuMain(void)
   // Logo size: 152 x 22
   ICON_ReadDisplay(30, cellHeight + (cellHeight - 22) / 2, ICON_RB_ROBOBEND);
   
+  // Labels.
+  GUI_DispStringCenter(cellWidth / 2,  cellHeight - BYTE_HEIGHT, (uint8_t *)"Fabriquer");
+  GUI_DispStringCenter(cellWidth + cellWidth / 2,  cellHeight - BYTE_HEIGHT, (uint8_t *)"Insérer fil");
+  GUI_DispStringCenter(2*cellWidth + cellWidth / 2,  cellHeight - BYTE_HEIGHT, (uint8_t *)"Retirer fil");
 
   const GUI_RECT btnRect[] = { btnProduceRect, btnInsertRect, btnRemoveRect, btnHelpRect, btnParametersRect };
 

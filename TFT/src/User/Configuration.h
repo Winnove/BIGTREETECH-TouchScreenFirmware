@@ -313,7 +313,7 @@
 #define SHOW_BTT_BOOTSCREEN
 
 // Bootscreen logo time in ms
-#define BTT_BOOTSCREEN_TIME 3000
+#define BTT_BOOTSCREEN_TIME 4000
 
 // Enable alternative Move Menu Buttons Layout matching the direction of actual printer axis
 // Update the icons from alternate icon folder.
