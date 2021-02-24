@@ -150,6 +150,9 @@ X_ICON (RB_INSERT_WIRE)
 X_ICON (RB_REMOVE_WIRE)
 X_ICON (RB_PARAMETERS)
 X_ICON (RB_HELP)
+X_ICON (RB_CHECK)
+X_ICON (RB_WARNING)
+X_ICON (RB_ARROW)
 X_ICON (OK)
 
 //after changing/adding/removing an icon, change the ICON_FLASH_SIGN in Settings.h

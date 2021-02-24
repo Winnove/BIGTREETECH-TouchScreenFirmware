@@ -235,8 +235,8 @@ void menuInsertWire(void)
   GUI_SetColor(BLUE);
   GUI_DispString(text_start_x+4*BYTE_WIDTH, text_start_y+0*BYTE_HEIGHT, (uint8_t *)"bleue");
   GUI_SetColor(BLACK);
-  GUI_DispString(text_start_x, text_start_y+1*BYTE_HEIGHT, (uint8_t *)" continue : commencez l'insertion");
-  GUI_DispString(text_start_x, text_start_y+2*BYTE_HEIGHT, (uint8_t *)" clignotante : continuez à insérer");
+  GUI_DispString(text_start_x, text_start_y+1*BYTE_HEIGHT, (uint8_t *)"-continue : commencez l'insertion");
+  GUI_DispString(text_start_x, text_start_y+2*BYTE_HEIGHT, (uint8_t *)"-clignotante : continuez à insérer");
   GUI_DispString(text_start_x, text_start_y+3*BYTE_HEIGHT, (uint8_t *)"LED ");
   GUI_SetColor(GREEN);
   GUI_DispString(text_start_x+4*BYTE_WIDTH, text_start_y+3*BYTE_HEIGHT, (uint8_t *)"verte");
@@ -247,7 +247,8 @@ void menuInsertWire(void)
   GUI_DispString(text_start_x+4*BYTE_WIDTH, text_start_y+4*BYTE_HEIGHT, (uint8_t *)"rouge");
   GUI_SetColor(BLACK);
   GUI_DispString(text_start_x+9*BYTE_WIDTH, text_start_y+4*BYTE_HEIGHT, (uint8_t *)" : stop");
-  GUI_DispString(text_start_x, text_start_y+6*BYTE_HEIGHT, (uint8_t *)"/!\\ Attention");
+  ICON_ReadDisplay(text_start_x, text_start_y+6*BYTE_HEIGHT, ICON_RB_WARNING);
+  GUI_DispString(text_start_x+3*BYTE_WIDTH, text_start_y+6*BYTE_HEIGHT, (uint8_t *)"Attention");
   GUI_DispString(text_start_x, text_start_y+7*BYTE_HEIGHT, (uint8_t *)"Longueur du fil minimum : 150mm");
   GUI_DispString(text_start_x, text_start_y+8*BYTE_HEIGHT, (uint8_t *)"Ne pas insérer si LED éteinte");
 
@@ -299,9 +300,10 @@ void menuRemoveWire(void)
   GUI_DispString(text_start_x+4*BYTE_WIDTH, text_start_y+3*BYTE_HEIGHT, (uint8_t *)"verte");
   GUI_SetColor(BLACK);
   GUI_DispString(text_start_x+9*BYTE_WIDTH, text_start_y+3*BYTE_HEIGHT, (uint8_t *)" : fil retiré");
-  GUI_DispString(text_start_x, text_start_y+5*BYTE_HEIGHT, (uint8_t *)"/!\\ Attention");
-  GUI_DispString(text_start_x, text_start_y+6*BYTE_HEIGHT, (uint8_t *)"Ne jamais retirer le fil quand la");
-  GUI_DispString(text_start_x, text_start_y+7*BYTE_HEIGHT, (uint8_t *)"LED clignote ou est éteinte");
+  ICON_ReadDisplay(text_start_x, text_start_y+5*BYTE_HEIGHT, ICON_RB_WARNING);
+  GUI_DispString(text_start_x+3*BYTE_WIDTH, text_start_y+5*BYTE_HEIGHT, (uint8_t *)"Attention");
+  GUI_DispString(text_start_x, text_start_y+6*BYTE_HEIGHT, (uint8_t *)"Ne pas toucher le fil quand la LED");
+  GUI_DispString(text_start_x, text_start_y+7*BYTE_HEIGHT, (uint8_t *)"clignote ou est éteinte");
 
   while(!isPress()) loopBackEnd();
   while(isPress())  loopBackEnd();
