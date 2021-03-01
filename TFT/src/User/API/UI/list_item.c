@@ -338,11 +338,11 @@ void DrawCharIcon(const GUI_RECT * rect, ICON_POS iconalign, uint16_t iconindex,
 {
   GUI_POINT icon_p = getTextStartPoint(rect->x0, rect->y0, rect->x1, rect->y1, iconalign, GET_ICONCHAR[iconindex]);
   GUI_SetColor(ICON_COLOR[iconindex]);
-  //if (drawBgColor)
-  //{
-  //  GUI_SetBkColor(btn_color);
-   // GUI_ClearPrect(rect);
-  //}
+  if (drawBgColor)
+  {
+    //GUI_SetBkColor(btn_color);
+    GUI_ClearPrect(rect);
+  }
 
   GUI_DispString(icon_p.x, icon_p.y, IconCharSelect(iconindex));
   GUI_RestoreColorDefault();
