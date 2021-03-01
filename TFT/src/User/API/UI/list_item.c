@@ -14,8 +14,8 @@ const uint16_t ICON_COLOR[ICONCHAR_NUM]=
   WHITE,    //ICONCHAR_NOZZLE
   WHITE,    //ICONCHAR_BED
   WHITE,    //ICONCHAR_FAN
-  MAT_YELLOW,    //ICONCHAR_FOLDER
-  MAT_BLUE,    //ICONCHAR_FILE
+  WHITE,    //ICONCHAR_FOLDER
+  WHITE,    //ICONCHAR_FILE
   WHITE,    //ICONCHAR_PAGEUP
   WHITE,    //ICONCHAR_PAGEDOWN
   WHITE,    //ICONCHAR_BACK
@@ -338,11 +338,12 @@ void DrawCharIcon(const GUI_RECT * rect, ICON_POS iconalign, uint16_t iconindex,
 {
   GUI_POINT icon_p = getTextStartPoint(rect->x0, rect->y0, rect->x1, rect->y1, iconalign, GET_ICONCHAR[iconindex]);
   GUI_SetColor(ICON_COLOR[iconindex]);
-  if (drawBgColor)
-  {
-    GUI_SetBkColor(btn_color);
-    GUI_ClearPrect(rect);
-  }
+  //if (drawBgColor)
+  //{
+  //  GUI_SetBkColor(btn_color);
+   // GUI_ClearPrect(rect);
+  //}
+
   GUI_DispString(icon_p.x, icon_p.y, IconCharSelect(iconindex));
   GUI_RestoreColorDefault();
 }
@@ -359,9 +360,9 @@ void DrawListItemPress(const GUI_RECT * rect, bool pressed)
   {
     GUI_SetColor(infoSettings.bg_color);
     GUI_DrawPrect(rect);
-    GUI_SetColor(infoSettings.list_border_color);
-    GUI_DrawLine(rect->x0, rect->y0 - 1, rect->x1 - 1, rect->y0 - 1);
-    GUI_DrawLine(rect->x0, rect->y1 - 1, rect->x1 - 1, rect->y1 - 1);
+    //GUI_SetColor(infoSettings.list_border_color);
+    //GUI_DrawLine(rect->x0, rect->y0 - 1, rect->x1 - 1, rect->y0 - 1);
+    //GUI_DrawLine(rect->x0, rect->y1 - 1, rect->x1 - 1, rect->y1 - 1);
   }
   GUI_RestoreColorDefault();
 }

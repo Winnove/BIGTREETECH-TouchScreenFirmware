@@ -1,10 +1,8 @@
 #include "MainPage.h"
 #include "includes.h"
 
-char * _rbPopupMessage = "PLACEHOLDER";
-FP_MENU _rbPopupNextMenu;
-
-void menuMain2(void)
+/*
+void menuMain(void)
 {
   // 1 title, ITEM_PER_PAGE items(icon+label)
   MENUITEMS mainPageItems = {
@@ -69,6 +67,10 @@ void menuMain2(void)
     loopProcess();
   }
 }
+*/
+
+char * _rbPopupMessage = "PLACEHOLDER";
+FP_MENU _rbPopupNextMenu;
 
 void menuMain(void)
 {
@@ -130,7 +132,8 @@ void menuMain(void)
         break;
 
       // Help.
-      case 3:        
+      case 3:     
+          infoMenu.menu[++infoMenu.cur] = menuHelp;     
         break;
 
       // Parameters.
@@ -336,11 +339,111 @@ void menuHelp(void)
 
   uint text_start_x = start_x;
   uint text_start_y = start_y - BYTE_HEIGHT/2;
+  GUI_DispString(text_start_x, text_start_y+0*BYTE_HEIGHT, (uint8_t *)"Pliez vos attelles MAXI et MANDI");
+  GUI_DispString(text_start_x, text_start_y+1*BYTE_HEIGHT, (uint8_t *)"avec une excellente adaptation");
+  GUI_DispString(text_start_x, text_start_y+2*BYTE_HEIGHT, (uint8_t *)"à la surface linguale des dents.");
+  GUI_DispString(text_start_x, text_start_y+3*BYTE_HEIGHT, (uint8_t *)"Les caractéristiques TECHNIQUES :");
+  ICON_ReadDisplay(text_start_x, text_start_y+4*BYTE_HEIGHT, ICON_RB_CHECK);
+  GUI_DispString(text_start_x+2*BYTE_WIDTH, text_start_y+4*BYTE_HEIGHT, (uint8_t *)" Découpe automatique");
+  ICON_ReadDisplay(text_start_x, text_start_y+5*BYTE_HEIGHT, ICON_RB_CHECK);
+  GUI_DispString(text_start_x+2*BYTE_WIDTH, text_start_y+5*BYTE_HEIGHT, (uint8_t *)" Consommables :");
+  GUI_DispString(text_start_x, text_start_y+6*BYTE_HEIGHT, (uint8_t *)"   - Fil en TIGE");
+  GUI_DispString(text_start_x, text_start_y+7*BYTE_HEIGHT, (uint8_t *)"   - Longueur minimum : 150mm");
+  GUI_DispString(text_start_x, text_start_y+8*BYTE_HEIGHT, (uint8_t *)"   - Sections : rondes");
+ 
+  uint circleAreaHeight = padding - radius; // 20
+  uint circleRadius = 7;
+  uint circleSpace = 4;
+  GUI_SetColor(GRAY);
+  GUI_FillCircle(LCD_WIDTH/2, LCD_HEIGHT-circleAreaHeight/2, circleRadius);
+  GUI_SetColor(WHITE);
+  GUI_FillCircle(LCD_WIDTH/2-circleRadius*2-circleSpace, LCD_HEIGHT-circleAreaHeight/2, circleRadius);
+  GUI_SetColor(GRAY);
+  GUI_FillCircle(LCD_WIDTH/2+circleRadius*2+circleSpace, LCD_HEIGHT-circleAreaHeight/2, circleRadius);
+
+  while(!isPress()) loopBackEnd();
+  while(isPress())  loopBackEnd();
+
+  GUI_Clear(infoSettings.bg_color);
+  GUI_SetColor(WHITE);
+  GUI_FillCircle(start_x, start_y, radius);
+  GUI_FillCircle(start_x, end_y, radius);
+  GUI_FillCircle(end_x, start_y, radius);
+  GUI_FillCircle(end_x, end_y, radius);
+  GUI_FillRect(start_x - radius, start_y, end_x + radius + 1, end_y);
+  GUI_FillRect(start_x, start_y - radius, end_x, end_y + radius + 1);
+
+  GUI_SetTextMode(GUI_TEXTMODE_TRANS);
+  GUI_SetColor(BLACK);
+
+  GUI_DispString(text_start_x, text_start_y+0*BYTE_HEIGHT, (uint8_t *)" - TMA, ø .16\"");
+  GUI_DispString(text_start_x, text_start_y+1*BYTE_HEIGHT, (uint8_t *)" - Acier, 3 brins tressés, ø .015\"");
+  GUI_DispString(text_start_x, text_start_y+2*BYTE_HEIGHT, (uint8_t *)" - Acier, 3 brins tressés, ø .017\"");
+  ICON_ReadDisplay(text_start_x, text_start_y+3*BYTE_HEIGHT, ICON_RB_CHECK);
+  GUI_DispString(text_start_x+2*BYTE_WIDTH, text_start_y+3*BYTE_HEIGHT, (uint8_t *)" Dimensions machine(cm): 25x29x19");
+  ICON_ReadDisplay(text_start_x, text_start_y+4*BYTE_HEIGHT, ICON_RB_CHECK);
+  GUI_DispString(text_start_x+2*BYTE_WIDTH, text_start_y+4*BYTE_HEIGHT, (uint8_t *)" Logiciel i");
+  GUI_SetColor(infoSettings.bg_color);
+  GUI_DispString(text_start_x+13*BYTE_WIDTH, text_start_y+4*BYTE_HEIGHT, (uint8_t *)"Form");
+  GUI_SetColor(BLACK);
+  GUI_DispString(text_start_x+17*BYTE_WIDTH, text_start_y+4*BYTE_HEIGHT, (uint8_t *)" fourni");
+  ICON_ReadDisplay(text_start_x, text_start_y+5*BYTE_HEIGHT, ICON_RB_CHECK);
+  GUI_DispString(text_start_x+2*BYTE_WIDTH, text_start_y+5*BYTE_HEIGHT, (uint8_t *)" Connectivité: Carte SD");
+  ICON_ReadDisplay(text_start_x, text_start_y+6*BYTE_HEIGHT, ICON_RB_CHECK);
+  GUI_DispString(text_start_x+2*BYTE_WIDTH, text_start_y+6*BYTE_HEIGHT, (uint8_t *)" Tension d'alimentation: 12V");
+  ICON_ReadDisplay(text_start_x, text_start_y+7*BYTE_HEIGHT, ICON_RB_CHECK);
+  GUI_DispString(text_start_x+2*BYTE_WIDTH, text_start_y+7*BYTE_HEIGHT, (uint8_t *)" Vitesse moyenne: 70mm/s");
+  ICON_ReadDisplay(text_start_x, text_start_y+8*BYTE_HEIGHT, ICON_RB_CHECK);
+  GUI_DispString(text_start_x+2*BYTE_WIDTH, text_start_y+8*BYTE_HEIGHT, (uint8_t *)" Précision moyenne: 1200μm");
+
+
+  GUI_SetColor(WHITE);
+  GUI_FillCircle(LCD_WIDTH/2, LCD_HEIGHT-circleAreaHeight/2, circleRadius);
+  GUI_SetColor(GRAY);
+  GUI_FillCircle(LCD_WIDTH/2-circleRadius*2-circleSpace, LCD_HEIGHT-circleAreaHeight/2, circleRadius);
+  GUI_SetColor(GRAY);
+  GUI_FillCircle(LCD_WIDTH/2+circleRadius*2+circleSpace, LCD_HEIGHT-circleAreaHeight/2, circleRadius);
+
+  while(!isPress()) loopBackEnd();
+  while(isPress())  loopBackEnd();
+  
+  GUI_Clear(infoSettings.bg_color);
+  GUI_SetColor(WHITE);
+  GUI_FillCircle(start_x, start_y, radius);
+  GUI_FillCircle(start_x, end_y, radius);
+  GUI_FillCircle(end_x, start_y, radius);
+  GUI_FillCircle(end_x, end_y, radius);
+  GUI_FillRect(start_x - radius, start_y, end_x + radius + 1, end_y);
+  GUI_FillRect(start_x, start_y - radius, end_x, end_y + radius + 1);
+
+  GUI_SetTextMode(GUI_TEXTMODE_TRANS);
+  GUI_SetColor(BLACK);
+
+  GUI_DispString(text_start_x, text_start_y+0*BYTE_HEIGHT, (uint8_t *)"OPTIMISATIONS :");
+  ICON_ReadDisplay(text_start_x, text_start_y+1*BYTE_HEIGHT, ICON_RB_ARROW);
+  GUI_DispString(text_start_x+2*BYTE_WIDTH, text_start_y+1*BYTE_HEIGHT, (uint8_t *)" Connectivité: Wifi");
+  ICON_ReadDisplay(text_start_x, text_start_y+2*BYTE_HEIGHT, ICON_RB_ARROW);
+  GUI_DispString(text_start_x+2*BYTE_WIDTH, text_start_y+2*BYTE_HEIGHT, (uint8_t *)" Consommables:");
+  GUI_DispString(text_start_x, text_start_y+3*BYTE_HEIGHT, (uint8_t *)"- Longueur minimum : 50mm");
+  GUI_DispString(text_start_x, text_start_y+4*BYTE_HEIGHT, (uint8_t *)"- Sections: rectangulaires/carrées");
+  ICON_ReadDisplay(text_start_x, text_start_y+5*BYTE_HEIGHT, ICON_RB_ARROW);
+  GUI_DispString(text_start_x+2*BYTE_WIDTH, text_start_y+5*BYTE_HEIGHT, (uint8_t *)" Précision moyenne : 800μm");
+  GUI_DispString(text_start_x, text_start_y+6*BYTE_HEIGHT, (uint8_t *)"CONTACTER L'ASSISTANCE :");
+  ICON_ReadDisplay(text_start_x, text_start_y+7*BYTE_HEIGHT, ICON_RB_TEL);
+  GUI_DispString(text_start_x+2*BYTE_WIDTH, text_start_y+7*BYTE_HEIGHT, (uint8_t *)" 06 27 73 33 76");
+  ICON_ReadDisplay(text_start_x, text_start_y+8*BYTE_HEIGHT, ICON_RB_MAIL);
+  GUI_DispString(text_start_x+2*BYTE_WIDTH, text_start_y+8*BYTE_HEIGHT, (uint8_t *)" contact@winnovemed.com");
+
+  GUI_SetColor(GRAY);
+  GUI_FillCircle(LCD_WIDTH/2, LCD_HEIGHT-circleAreaHeight/2, circleRadius);
+  GUI_SetColor(GRAY);
+  GUI_FillCircle(LCD_WIDTH/2-circleRadius*2-circleSpace, LCD_HEIGHT-circleAreaHeight/2, circleRadius);
+  GUI_SetColor(WHITE);
+  GUI_FillCircle(LCD_WIDTH/2+circleRadius*2+circleSpace, LCD_HEIGHT-circleAreaHeight/2, circleRadius);
 
   while(!isPress()) loopBackEnd();
   while(isPress())  loopBackEnd();
 
   GUI_RestoreColorDefault();
-  infoMenu.cur--;
   infoMenu.cur--;
 }

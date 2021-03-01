@@ -6,7 +6,6 @@ extern "C" {
 #endif
 
 void menuMain(void);
-void menuMain2(void);
 
 void popupValidation();
 

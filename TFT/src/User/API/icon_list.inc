@@ -153,6 +153,8 @@ X_ICON (RB_HELP)
 X_ICON (RB_CHECK)
 X_ICON (RB_WARNING)
 X_ICON (RB_ARROW)
+X_ICON (RB_MAIL)
+X_ICON (RB_TEL)
 X_ICON (OK)
 
 //after changing/adding/removing an icon, change the ICON_FLASH_SIGN in Settings.h
