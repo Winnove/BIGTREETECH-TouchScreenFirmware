@@ -504,10 +504,10 @@
  * CUSTOM_X_LABEL is the name of the custom button, CUSTOM_X_GCODE is the G-code to be sent by the custom button,
  * this should always end with a New-Line character '\n'.
  */
-#define CUSTOM_0_LABEL "Disable Steppers"
-#define CUSTOM_0_GCODE "M84\n"
-#define CUSTOM_1_LABEL "Init SD Card"
-#define CUSTOM_1_GCODE "M21\n"
+#define CUSTOM_0_LABEL "Insert wire"
+#define CUSTOM_0_GCODE "G28 Y\nG28 X\nG1 F1500 Y-45\nG4 S2\nM5000\nM18\n"
+#define CUSTOM_1_LABEL "Remove wire"
+#define CUSTOM_1_GCODE "G28 X Y\nG1 F1500 Y-45\nG4 S2\nM5000\n"
 #define CUSTOM_2_LABEL "Release SD Card"
 #define CUSTOM_2_GCODE "M22\n"
 #define CUSTOM_3_LABEL "Enable Leveling State"

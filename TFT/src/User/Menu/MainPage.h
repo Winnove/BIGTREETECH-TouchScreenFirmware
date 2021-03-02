@@ -7,8 +7,6 @@ extern "C" {
 
 void menuMain(void);
 
-void popupValidation();
-
 void insertWire(void);
 void removeWire(void);
 

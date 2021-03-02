@@ -70,7 +70,62 @@ void menuMain(void)
 */
 
 char * _rbPopupMessage = "PLACEHOLDER";
-FP_MENU _rbPopupNextMenu;
+FP_MENU _rbPopupFunction;
+
+void popupValidation()
+{
+  uint radius = 20;
+  uint start_x = 50;
+  uint start_y = 50;
+  uint end_x = 430;
+  uint end_y = 140;
+  uint start_x_icon_back = start_x - radius;
+  uint start_x_icon_ok = LCD_WIDTH - ICON_WIDTH -  start_x + radius;
+  uint start_y_icon = 175;
+
+  GUI_Clear(infoSettings.bg_color);
+  GUI_SetColor(WHITE);
+  GUI_FillCircle(start_x, start_y, radius);
+  GUI_FillCircle(start_x, end_y, radius);
+  GUI_FillCircle(end_x, start_y, radius);
+  GUI_FillCircle(end_x, end_y, radius);
+  GUI_FillRect(start_x - radius, start_y, end_x + radius + 1, end_y);
+  GUI_FillRect(start_x, start_y - radius, end_x, end_y + radius + 1);
+
+  GUI_SetTextMode(GUI_TEXTMODE_TRANS);
+  GUI_SetColor(BLACK);
+  GUI_DispStringCenter(LCD_WIDTH / 2,  start_y + (end_y - start_y) / 2 - BYTE_HEIGHT / 2, (uint8_t *)_rbPopupMessage);
+
+  GUI_RECT btnBackRect = {start_x_icon_back, start_y_icon, start_x_icon_back + ICON_WIDTH, start_y_icon + ICON_HEIGHT};
+  GUI_RECT btnOkRect = {start_x_icon_ok, start_y_icon, start_x_icon_ok + ICON_WIDTH, start_y_icon + ICON_HEIGHT};
+
+  ICON_ReadDisplay(start_x_icon_back, start_y_icon, ICON_BACK);
+  ICON_ReadDisplay(start_x_icon_ok, start_y_icon, ICON_OK);
+
+  const GUI_RECT btnRect[] = { btnBackRect, btnOkRect };
+
+  while (infoMenu.menu[infoMenu.cur] == popupValidation)
+  {
+    uint16_t key_num = KEY_GetValue(2, btnRect);
+    switch (key_num)
+    {
+      case 0:
+        GUI_RestoreColorDefault();
+        infoMenu.cur--;       
+        break;
+
+      case 1:
+        GUI_RestoreColorDefault();
+        _rbPopupFunction();      
+        break;
+
+      default:
+        break;
+    }
+
+    loopProcess();
+  }
+}
 
 void menuMain(void)
 {
@@ -120,14 +175,14 @@ void menuMain(void)
       // Insert.
       case 1:
         _rbPopupMessage = "Procéder au chargement du fil ?";
-        _rbPopupNextMenu = menuInsertWire;
+        _rbPopupFunction = insertWire;
         infoMenu.menu[++infoMenu.cur] = popupValidation;      
         break;
 
       // Remove.
       case 2:
           _rbPopupMessage = "Retirer le fil ?";
-          _rbPopupNextMenu = menuRemoveWire;
+          _rbPopupFunction = removeWire;
           infoMenu.menu[++infoMenu.cur] = popupValidation;       
         break;
 
@@ -148,60 +203,7 @@ void menuMain(void)
   }
 }
 
-void popupValidation()
-{
-  uint radius = 20;
-  uint start_x = 50;
-  uint start_y = 50;
-  uint end_x = 430;
-  uint end_y = 140;
-  uint start_x_icon_back = start_x - radius;
-  uint start_x_icon_ok = LCD_WIDTH - ICON_WIDTH -  start_x + radius;
-  uint start_y_icon = 175;
 
-  GUI_Clear(infoSettings.bg_color);
-  GUI_SetColor(WHITE);
-  GUI_FillCircle(start_x, start_y, radius);
-  GUI_FillCircle(start_x, end_y, radius);
-  GUI_FillCircle(end_x, start_y, radius);
-  GUI_FillCircle(end_x, end_y, radius);
-  GUI_FillRect(start_x - radius, start_y, end_x + radius + 1, end_y);
-  GUI_FillRect(start_x, start_y - radius, end_x, end_y + radius + 1);
-
-  GUI_SetTextMode(GUI_TEXTMODE_TRANS);
-  GUI_SetColor(BLACK);
-  GUI_DispStringCenter(LCD_WIDTH / 2,  start_y + (end_y - start_y) / 2 - BYTE_HEIGHT / 2, (uint8_t *)_rbPopupMessage);
-
-  GUI_RECT btnBackRect = {start_x_icon_back, start_y_icon, start_x_icon_back + ICON_WIDTH, start_y_icon + ICON_HEIGHT};
-  GUI_RECT btnOkRect = {start_x_icon_ok, start_y_icon, start_x_icon_ok + ICON_WIDTH, start_y_icon + ICON_HEIGHT};
-
-  ICON_ReadDisplay(start_x_icon_back, start_y_icon, ICON_BACK);
-  ICON_ReadDisplay(start_x_icon_ok, start_y_icon, ICON_OK);
-
-  const GUI_RECT btnRect[] = { btnBackRect, btnOkRect };
-
-  while (infoMenu.menu[infoMenu.cur] == popupValidation)
-  {
-    uint16_t key_num = KEY_GetValue(2, btnRect);
-    switch (key_num)
-    {
-      case 0:
-        GUI_RestoreColorDefault();
-        infoMenu.cur--;       
-        break;
-
-      case 1:
-        GUI_RestoreColorDefault();
-        infoMenu.menu[++infoMenu.cur] = _rbPopupNextMenu;      
-        break;
-
-      default:
-        break;
-    }
-
-    loopProcess();
-  }
-}
 
 void insertWire()
 {

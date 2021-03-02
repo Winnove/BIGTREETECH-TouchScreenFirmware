@@ -55,6 +55,64 @@ const GUI_RECT gcodeRect[NUM_PER_PAGE] = {
   1*SPACE_X_PER_ICON-BYTE_WIDTH/2,  2*ICON_HEIGHT+1*SPACE_Y+ICON_START_Y+(SPACE_Y-BYTE_HEIGHT)/2+BYTE_HEIGHT},
 };
 
+char * _rbPopupMessagePrint = "PLACEHOLDER";
+FP_MENU _rbPopupNextMenuPrint;
+
+void popupValidationPrint()
+{
+  uint radius = 20;
+  uint start_x = 50;
+  uint start_y = 50;
+  uint end_x = 430;
+  uint end_y = 140;
+  uint start_x_icon_back = start_x - radius;
+  uint start_x_icon_ok = LCD_WIDTH - ICON_WIDTH -  start_x + radius;
+  uint start_y_icon = 175;
+
+  GUI_Clear(infoSettings.bg_color);
+  GUI_SetColor(WHITE);
+  GUI_FillCircle(start_x, start_y, radius);
+  GUI_FillCircle(start_x, end_y, radius);
+  GUI_FillCircle(end_x, start_y, radius);
+  GUI_FillCircle(end_x, end_y, radius);
+  GUI_FillRect(start_x - radius, start_y, end_x + radius + 1, end_y);
+  GUI_FillRect(start_x, start_y - radius, end_x, end_y + radius + 1);
+
+  GUI_SetTextMode(GUI_TEXTMODE_TRANS);
+  GUI_SetColor(BLACK);
+  GUI_DispStringCenter(LCD_WIDTH / 2,  start_y + (end_y - start_y) / 2 - BYTE_HEIGHT, (uint8_t *)_rbPopupMessagePrint);
+
+  GUI_RECT btnBackRect = {start_x_icon_back, start_y_icon, start_x_icon_back + ICON_WIDTH, start_y_icon + ICON_HEIGHT};
+  GUI_RECT btnOkRect = {start_x_icon_ok, start_y_icon, start_x_icon_ok + ICON_WIDTH, start_y_icon + ICON_HEIGHT};
+
+  ICON_ReadDisplay(start_x_icon_back, start_y_icon, ICON_BACK);
+  ICON_ReadDisplay(start_x_icon_ok, start_y_icon, ICON_OK);
+
+  const GUI_RECT btnRect[] = { btnBackRect, btnOkRect };
+
+  while (infoMenu.menu[infoMenu.cur] == popupValidationPrint)
+  {
+    uint16_t key_num = KEY_GetValue(2, btnRect);
+    switch (key_num)
+    {
+      case 0:
+        GUI_RestoreColorDefault();
+        infoMenu.cur--;       
+        break;
+
+      case 1:
+        GUI_RestoreColorDefault();
+        infoMenu.menu[++infoMenu.cur] = _rbPopupNextMenuPrint;      
+        break;
+
+      default:
+        break;
+    }
+
+    loopProcess();
+  }
+}
+
 void normalNameDisp(const GUI_RECT *rect, uint8_t *name)
 {
   if (name == NULL) return;
@@ -280,13 +338,23 @@ void menuPrintFromSource(void)
             //load model preview in flash if icon exists
             setPrintModelIcon(infoFile.source < BOARD_SD && model_DecodeToFlash(infoFile.title));
 
+            
             char temp_info[FILE_NUM + 50];
-            sprintf(temp_info, (char *)textSelect(LABEL_START_PRINT),
+            //sprintf(temp_info, (char *)textSelect(LABEL_START_PRINT),
+            //       (uint8_t *)((infoMachineSettings.long_filename_support == ENABLED && infoFile.source == BOARD_SD) ?
+            //      infoFile.Longfile[infoFile.fileIndex] : infoFile.file[infoFile.fileIndex]));
+            //confirm file selction
+            //setDialogText(LABEL_PRINT, (uint8_t *)temp_info, LABEL_CONFIRM, LABEL_CANCEL);
+            //showDialog(DIALOG_TYPE_QUESTION, startPrint, ExitDir, NULL);
+            
+             sprintf(temp_info, (char *)"Fabriquer\n%s ?",
                     (uint8_t *)((infoMachineSettings.long_filename_support == ENABLED && infoFile.source == BOARD_SD) ?
                     infoFile.Longfile[infoFile.fileIndex] : infoFile.file[infoFile.fileIndex]));
-            //confirm file selction
-            setDialogText(LABEL_PRINT, (uint8_t *)temp_info, LABEL_CONFIRM, LABEL_CANCEL);
-            showDialog(DIALOG_TYPE_QUESTION, startPrint, ExitDir, NULL);
+
+           // Show confirmation dialog.
+          _rbPopupMessagePrint = temp_info;
+          _rbPopupNextMenuPrint = startPrint;
+          infoMenu.menu[++infoMenu.cur] = popupValidationPrint; 
           }
         }
         break;
