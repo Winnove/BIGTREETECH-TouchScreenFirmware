@@ -1,37 +1,8 @@
 #include "Printing.h"
 #include "includes.h"
 
-const GUI_POINT printinfo_points[6] = {
-    {START_X + PICON_LG_WIDTH * 0 + PICON_SPACE_X * 0, ICON_START_Y + PICON_HEIGHT * 0 + PICON_SPACE_Y * 0},
-    {START_X + PICON_LG_WIDTH * 1 + PICON_SPACE_X * 1, ICON_START_Y + PICON_HEIGHT * 0 + PICON_SPACE_Y * 0},
-    {START_X + PICON_LG_WIDTH * 2 + PICON_SPACE_X * 2, ICON_START_Y + PICON_HEIGHT * 0 + PICON_SPACE_Y * 0},
-    {START_X + PICON_LG_WIDTH * 0 + PICON_SPACE_X * 0, ICON_START_Y + PICON_HEIGHT * 1 + PICON_SPACE_Y * 1},
-    {START_X + PICON_LG_WIDTH * 1 + PICON_SPACE_X * 1, ICON_START_Y + PICON_HEIGHT * 1 + PICON_SPACE_Y * 1},
-    {START_X + PICON_LG_WIDTH * 2 + PICON_SPACE_X * 2, ICON_START_Y + PICON_HEIGHT * 1 + PICON_SPACE_Y * 1},
-};
-
-const GUI_RECT printinfo_val_rect[6] = {
-    {START_X + PICON_LG_WIDTH * 0 + PICON_SPACE_X * 0 + PICON_VAL_X, ICON_START_Y + PICON_HEIGHT * 0 + PICON_SPACE_Y * 0 + PICON_VAL_Y,
-     START_X + PICON_LG_WIDTH * 0 + PICON_SPACE_X * 0 + PICON_VAL_LG_EX, ICON_START_Y + PICON_HEIGHT * 0 + PICON_SPACE_Y * 0 + PICON_VAL_Y + BYTE_HEIGHT},
-
-    {START_X + PICON_LG_WIDTH * 1 + PICON_SPACE_X * 1 + PICON_VAL_X, ICON_START_Y + PICON_HEIGHT * 0 + PICON_SPACE_Y * 0 + PICON_VAL_Y,
-     START_X + PICON_LG_WIDTH * 1 + PICON_SPACE_X * 1 + PICON_VAL_LG_EX, ICON_START_Y + PICON_HEIGHT * 0 + PICON_SPACE_Y * 0 + PICON_VAL_Y + BYTE_HEIGHT},
-
-    {START_X + PICON_LG_WIDTH * 2 + PICON_SPACE_X * 2 + PICON_VAL_X, ICON_START_Y + PICON_HEIGHT * 0 + PICON_SPACE_Y * 0 + PICON_VAL_Y,
-     START_X + PICON_LG_WIDTH * 2 + PICON_SPACE_X * 2 + PICON_VAL_SM_EX, ICON_START_Y + PICON_HEIGHT * 0 + PICON_SPACE_Y * 0 + PICON_VAL_Y + BYTE_HEIGHT},
-
-    {START_X + PICON_LG_WIDTH * 0 + PICON_SPACE_X * 0 + PICON_VAL_X, ICON_START_Y + PICON_HEIGHT * 1 + PICON_SPACE_Y * 1 + PICON_VAL_Y,
-     START_X + PICON_LG_WIDTH * 0 + PICON_SPACE_X * 0 + PICON_VAL_LG_EX, ICON_START_Y + PICON_HEIGHT * 1 + PICON_SPACE_Y * 1 + PICON_VAL_Y + BYTE_HEIGHT},
-
-    {START_X + PICON_LG_WIDTH * 1 + PICON_SPACE_X * 1 + PICON_VAL_X, ICON_START_Y + PICON_HEIGHT * 1 + PICON_SPACE_Y * 1 + PICON_VAL_Y,
-     START_X + PICON_LG_WIDTH * 1 + PICON_SPACE_X * 1 + PICON_VAL_LG_EX, ICON_START_Y + PICON_HEIGHT * 1 + PICON_SPACE_Y * 1 + PICON_VAL_Y + BYTE_HEIGHT},
-
-    {START_X + PICON_LG_WIDTH * 2 + PICON_SPACE_X * 2 + PICON_VAL_X, ICON_START_Y + PICON_HEIGHT * 1 + PICON_SPACE_Y * 1 + PICON_VAL_Y,
-     START_X + PICON_LG_WIDTH * 2 + PICON_SPACE_X * 2 + PICON_VAL_SM_EX, ICON_START_Y + PICON_HEIGHT * 1 + PICON_SPACE_Y * 1 + PICON_VAL_Y + BYTE_HEIGHT},
-};
-
-static uint32_t nextLayerDrawTime = 0;
-const  char *const Speed_ID[2] = {"Speed", "Flow"};
+//static uint32_t nextLayerDrawTime = 0;
+//const  char *const Speed_ID[2] = {"Speed", "Flow"};
 bool hasFilamentData;
 
 #define TOGGLE_TIME 2000 // 1 seconds is 1000
@@ -45,6 +16,7 @@ bool hasFilamentData;
 #define Z_ICON_POS   4
 #define SPD_ICON_POS 5
 
+/*
 const ITEM itemIsPause[2] = {
   // icon        label
   {ICON_PAUSE,   LABEL_PAUSE},
@@ -57,6 +29,7 @@ const ITEM itemIsPrinting[3] = {
   {ICON_MAINMENU,   LABEL_MAIN_SCREEN},
   {ICON_BACK,       LABEL_BACK},
 };
+*/
 
 void menuBeforePrinting(void)
 {
@@ -124,10 +97,11 @@ void menuBeforePrinting(void)
   }
   infoPrinting.printing = true;
   infoPrinting.time = 0;
-  initPrintSummary();
+  //initPrintSummary();
   infoMenu.menu[infoMenu.cur] = menuPrinting;
 }
 
+/*
 static inline void reValueNozzle(int icon_pos)
 {
   char tempstr[10];
@@ -140,7 +114,9 @@ static inline void reValueNozzle(int icon_pos)
   GUI_DispStringInPrect(&printinfo_val_rect[icon_pos], (u8 *)tempstr);
   GUI_SetTextMode(GUI_TEXTMODE_NORMAL);
 }
+*/
 
+/*
 static inline void reValueBed(int icon_pos)
 {
   char tempstr[10];
@@ -153,7 +129,9 @@ static inline void reValueBed(int icon_pos)
   GUI_DispStringInPrect(&printinfo_val_rect[icon_pos], (u8 *)tempstr);
   GUI_SetTextMode(GUI_TEXTMODE_NORMAL);
 }
+*/
 
+/*
 static inline void reDrawFan(int icon_pos)
 {
   char tempstr[10];
@@ -169,7 +147,9 @@ static inline void reDrawFan(int icon_pos)
   GUI_DispStringInPrect(&printinfo_val_rect[icon_pos], (u8 *)tempstr);
   GUI_SetTextMode(GUI_TEXTMODE_NORMAL);
 }
+*/
 
+/*
 static inline void reDrawSpeed(int icon_pos)
 {
   char tempstr[10];
@@ -186,7 +166,9 @@ static inline void reDrawSpeed(int icon_pos)
   GUI_DispStringInPrect(&printinfo_val_rect[icon_pos], (u8 *)tempstr);
   GUI_SetTextMode(GUI_TEXTMODE_NORMAL);
 }
+*/
 
+/*
 static inline void reDrawTime(int icon_pos)
 {
   u8 hour = infoPrinting.time / 3600,
@@ -202,7 +184,9 @@ static inline void reDrawTime(int icon_pos)
   GUI_SetNumMode(GUI_NUMMODE_SPACE);
   GUI_SetTextMode(GUI_TEXTMODE_NORMAL);
 }
+*/
 
+/*
 static inline void reDrawProgress(int icon_pos)
 {
   char buf[6];
@@ -211,7 +195,10 @@ static inline void reDrawProgress(int icon_pos)
   GUI_DispString(printinfo_points[3].x + PICON_TITLE_X, printinfo_points[3].y + PICON_TITLE_Y, (u8 *)buf);
   GUI_SetTextMode(GUI_TEXTMODE_NORMAL);
 }
+*/
 
+
+/*
 static inline void reDrawLayer(int icon_pos)
 {
   if (OS_GetTimeMs() > nextLayerDrawTime)
@@ -229,7 +216,9 @@ static inline void reDrawLayer(int icon_pos)
     nextLayerDrawTime = OS_GetTimeMs() + LAYER_DRAW_TIME;
   }
 }
+*/
 
+/*
 static inline void toggleInfo(void)
 {
   if (nextScreenUpdate(TOGGLE_TIME))
@@ -257,7 +246,9 @@ static inline void toggleInfo(void)
       updateFilamentUsed();
   }
 }
+*/
 
+/*
 static inline void printingDrawPage(void)
 {
   reValueNozzle(EXT_ICON_POS);
@@ -269,7 +260,9 @@ static inline void printingDrawPage(void)
   reDrawLayer(Z_ICON_POS);
   reDrawSpeed(SPD_ICON_POS);
 }
+*/
 
+/*
 void drawPrintInfo(void)
 {
   GUI_SetTextMode(GUI_TEXTMODE_TRANS);
@@ -288,6 +281,7 @@ void drawPrintInfo(void)
   GUI_DispStringInPrect(&msgRect,LABEL_CLICK_FOR_MORE);
   GUI_RestoreColorDefault();
 }
+*/
 
 void stopConfirm(void)
 {
@@ -330,6 +324,133 @@ void printInfoPopup(void)
   popupReminder(DIALOG_TYPE_INFO, (uint8_t *)infoPrintSummary.name, (uint8_t *)showInfo);
 }
 
+void menuPrinting(void)
+{  
+  uint32_t time = 0;
+  bool lastPrinting = isPrinting();
+
+  if (lastPrinting == true)
+  {
+    //if (infoMachineSettings.long_filename_support == ENABLED && infoFile.source == BOARD_SD)
+      //printingItems.title.address = (uint8_t *) infoFile.Longfile[infoFile.fileIndex];
+    //else
+      //printingItems.title.address = getCurGcodeName(infoFile.title);
+  }
+  else // returned to this menu after a print was done (ex: after a popup)
+  {
+  }
+
+  ///////////////////////////////////////////////////
+  uint padding = 40;
+  uint radius = 20;
+  uint start_x = padding;
+  uint start_y = padding;
+  uint end_x = LCD_WIDTH - padding;
+  uint end_y = LCD_HEIGHT - padding;
+  uint progressbar_width = 300;
+  uint progressbar_height = BYTE_HEIGHT * 2;
+  uint progressbar_start_x = (LCD_WIDTH - progressbar_width) / 2;
+  uint progressbar_start_y = start_x + 7*BYTE_HEIGHT;
+
+  GUI_Clear(infoSettings.bg_color);
+  GUI_SetColor(WHITE);
+  GUI_FillCircle(start_x, start_y, radius);
+  GUI_FillCircle(start_x, end_y, radius);
+  GUI_FillCircle(end_x, start_y, radius);
+  GUI_FillCircle(end_x, end_y, radius);
+  GUI_FillRect(start_x - radius, start_y, end_x + radius + 1, end_y);
+  GUI_FillRect(start_x, start_y - radius, end_x, end_y + radius + 1);
+
+  GUI_SetTextMode(GUI_TEXTMODE_TRANS);
+  GUI_SetColor(BLACK);
+
+  uint text_start_y = start_y - BYTE_HEIGHT/2;
+  GUI_DispStringCenter(LCD_WIDTH / 2, text_start_y+2*BYTE_HEIGHT, (uint8_t *)"FABRICATION...");
+  GUI_DispStringCenter(LCD_WIDTH / 2, text_start_y+3*BYTE_HEIGHT, (uint8_t *)getCurGcodeName(infoFile.title));
+  GUI_DispStringCenter(LCD_WIDTH / 2, text_start_y+4*BYTE_HEIGHT, (uint8_t *)"0%%");
+
+  GUI_SetColor(infoSettings.bg_color);
+  GUI_DrawRect(progressbar_start_x, progressbar_start_y, progressbar_start_x + progressbar_width, progressbar_start_y + progressbar_height);
+  //////////////////////////////////////////////////////
+
+  while (infoMenu.menu[infoMenu.cur] == menuPrinting)
+  {    
+    //check printing progress
+    if (infoPrinting.size != 0)
+    {
+      //check print time change
+      if (time != infoPrinting.time ||
+          infoPrinting.progress != MIN((uint64_t)infoPrinting.cur * 100 / infoPrinting.size, 100))
+      {
+        time = infoPrinting.time;
+        infoPrinting.progress = MIN((uint64_t)infoPrinting.cur * 100 / infoPrinting.size, 100);
+        RAPID_SERIAL_LOOP(); //perform backend printing loop before drawing to avoid printer idling
+        
+        // Draw progress.
+        char buf[6];
+        sprintf(buf, "%d%%", infoPrinting.progress);
+        GUI_SetColor(BLACK);
+        GUI_DispStringCenter(LCD_WIDTH / 2, text_start_y+4*BYTE_HEIGHT, (uint8_t *)buf);
+        GUI_SetColor(infoSettings.bg_color);
+        GUI_FillRect(progressbar_start_x, progressbar_start_y, progressbar_start_x + (progressbar_width / 100 * infoPrinting.progress), progressbar_start_y + progressbar_height);
+      }
+    }
+    else
+    {
+      if (infoPrinting.progress != 100)
+      {
+        infoPrinting.progress = 100;
+        
+         // Draw progress.
+        GUI_SetColor(BLACK);
+        GUI_DispStringCenter(LCD_WIDTH / 2, text_start_y+4*BYTE_HEIGHT, (uint8_t *)"100%%");
+        GUI_SetColor(infoSettings.bg_color);
+        GUI_FillRect(progressbar_start_x, progressbar_start_y, progressbar_start_x + progressbar_width, progressbar_start_y + progressbar_height);
+      }
+    }
+
+    // check if print just started or just finished
+    if (lastPrinting != isPrinting())
+    {
+      lastPrinting = isPrinting();
+      if (lastPrinting == true) // print is ongoing
+      {
+        return; // It will restart this interface if directly return this function without modify the value of infoMenu
+      }
+      else // print finished
+      {
+        GUI_Clear(infoSettings.bg_color);
+        GUI_SetColor(WHITE);
+        GUI_FillCircle(start_x, start_y, radius);
+        GUI_FillCircle(start_x, end_y, radius);
+        GUI_FillCircle(end_x, start_y, radius);
+        GUI_FillCircle(end_x, end_y, radius);
+        GUI_FillRect(start_x - radius, start_y, end_x + radius + 1, end_y);
+        GUI_FillRect(start_x, start_y - radius, end_x, end_y + radius + 1);
+
+        GUI_SetTextMode(GUI_TEXTMODE_TRANS);
+        GUI_SetColor(BLACK);
+        GUI_DispStringCenter(LCD_WIDTH / 2,  start_y + (end_y - start_y) / 2 - BYTE_HEIGHT, (uint8_t *)"FABRICATION TERMINEE");
+        GUI_DispStringCenter(LCD_WIDTH / 2,  start_y + (end_y - start_y) / 2 , (uint8_t *)getCurGcodeName(infoFile.title));
+
+        while(!isPress()) loopBackEnd();
+        while(isPress())  loopBackEnd();
+
+        exitPrinting();
+        GUI_RestoreColorDefault();
+        infoMenu.cur = 0;
+      }
+    }
+
+    //KEY_VALUES key_num = menuKeyGetValue();
+    //switch (key_num)
+    //{}      
+
+    loopProcess();
+  }
+}
+
+/*
 void menuPrinting(void)
 {
   //1title, ITEM_PER_PAGE item(icon + label)
@@ -375,7 +496,7 @@ void menuPrinting(void)
     printingItems.items[KEY_ICON_7] = itemIsPrinting[2]; // Back
   }
 
-  menuDrawPage(&printingItems);
+  //menuDrawPage(&printingItems);
   printingDrawPage();
   if (lastPrinting == false)
     drawPrintInfo();
@@ -384,7 +505,7 @@ void menuPrinting(void)
   {
     //    Scroll_DispString(&titleScroll, LEFT); //Scroll display file name will take too many CPU cycles
 
-    //check nozzle temp change
+    //check nozzle temp change    
     if (nowHeat.T[currentTool].current != heatGetCurrentTemp(currentTool) ||
         nowHeat.T[currentTool].target != heatGetTargetTemp(currentTool))
     {
@@ -410,6 +531,7 @@ void menuPrinting(void)
       RAPID_SERIAL_LOOP(); //perform backend printing loop before drawing to avoid printer idling
       reDrawFan(FAN_ICON_POS);
     }
+    
 
     //check printing progress
     if (infoPrinting.size != 0)
@@ -542,3 +664,4 @@ void menuPrinting(void)
     loopProcess();
   }
 }
+*/
