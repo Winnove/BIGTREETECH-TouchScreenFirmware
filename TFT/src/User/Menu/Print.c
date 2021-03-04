@@ -80,7 +80,8 @@ void popupValidationPrint()
 
   GUI_SetTextMode(GUI_TEXTMODE_TRANS);
   GUI_SetColor(BLACK);
-  GUI_DispStringCenter(LCD_WIDTH / 2,  start_y + (end_y - start_y) / 2 - BYTE_HEIGHT, (uint8_t *)_rbPopupMessagePrint);
+  GUI_DispStringCenter(LCD_WIDTH / 2,  start_y + (end_y - start_y) / 2 - BYTE_HEIGHT, (uint8_t *)"Fabriquer :");
+  GUI_DispStringCenter(LCD_WIDTH / 2,  start_y + (end_y - start_y) / 2, (uint8_t *)_rbPopupMessagePrint);
 
   GUI_RECT btnBackRect = {start_x_icon_back, start_y_icon, start_x_icon_back + ICON_WIDTH, start_y_icon + ICON_HEIGHT};
   GUI_RECT btnOkRect = {start_x_icon_ok, start_y_icon, start_x_icon_ok + ICON_WIDTH, start_y_icon + ICON_HEIGHT};
@@ -347,7 +348,7 @@ void menuPrintFromSource(void)
             //setDialogText(LABEL_PRINT, (uint8_t *)temp_info, LABEL_CONFIRM, LABEL_CANCEL);
             //showDialog(DIALOG_TYPE_QUESTION, startPrint, ExitDir, NULL);
             
-             sprintf(temp_info, (char *)"Fabriquer\n%s ?",
+             sprintf(temp_info, (char *)"%s ?",
                     (uint8_t *)((infoMachineSettings.long_filename_support == ENABLED && infoFile.source == BOARD_SD) ?
                     infoFile.Longfile[infoFile.fileIndex] : infoFile.file[infoFile.fileIndex]));
 
