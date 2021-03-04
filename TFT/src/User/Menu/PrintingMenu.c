@@ -389,7 +389,8 @@ void menuPrinting(void)
         // Draw progress.
         char buf[6];
         sprintf(buf, "%d%%", infoPrinting.progress);
-        // TODO: GUI_ClearRect
+        GUI_SetColor(WHITE);
+        GUI_FillRect(start_x, text_start_y+4*BYTE_HEIGHT,end_x, text_start_y+5*BYTE_HEIGHT);
         GUI_SetColor(BLACK);
         GUI_DispStringCenter(LCD_WIDTH / 2, text_start_y+4*BYTE_HEIGHT, (uint8_t *)buf);
         GUI_SetColor(infoSettings.bg_color);
@@ -403,6 +404,8 @@ void menuPrinting(void)
         infoPrinting.progress = 100;
         
          // Draw progress.
+        GUI_SetColor(WHITE);
+        GUI_FillRect(start_x, text_start_y+4*BYTE_HEIGHT,end_x, text_start_y+5*BYTE_HEIGHT);
         GUI_SetColor(BLACK);
         GUI_DispStringCenter(LCD_WIDTH / 2, text_start_y+4*BYTE_HEIGHT, (uint8_t *)"100%%");
         GUI_SetColor(infoSettings.bg_color);
