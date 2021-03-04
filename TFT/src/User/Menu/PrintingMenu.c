@@ -350,7 +350,7 @@ void menuPrinting(void)
   uint progressbar_width = 300;
   uint progressbar_height = BYTE_HEIGHT * 2;
   uint progressbar_start_x = (LCD_WIDTH - progressbar_width) / 2;
-  uint progressbar_start_y = start_x + 7*BYTE_HEIGHT;
+  uint progressbar_start_y = start_y + 6*BYTE_HEIGHT;
 
   GUI_Clear(infoSettings.bg_color);
   GUI_SetColor(WHITE);
@@ -389,6 +389,7 @@ void menuPrinting(void)
         // Draw progress.
         char buf[6];
         sprintf(buf, "%d%%", infoPrinting.progress);
+        // TODO: GUI_ClearRect
         GUI_SetColor(BLACK);
         GUI_DispStringCenter(LCD_WIDTH / 2, text_start_y+4*BYTE_HEIGHT, (uint8_t *)buf);
         GUI_SetColor(infoSettings.bg_color);
