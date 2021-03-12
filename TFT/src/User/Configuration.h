@@ -505,9 +505,9 @@
  * this should always end with a New-Line character '\n'.
  */
 #define CUSTOM_0_LABEL "Insert wire"
-#define CUSTOM_0_GCODE "G28 Y\nG28 X\nG1 F1500 Y-45\nG4 S2\nM5000\nM18\n"
+#define CUSTOM_0_GCODE "G28 Y\nG1 F1500 Y-45\nG28 X\nG4 S2\nM5000\nM18\n"
 #define CUSTOM_1_LABEL "Remove wire"
-#define CUSTOM_1_GCODE "G1 F400 E200\n G92 E0\nM18\n"
+#define CUSTOM_1_GCODE "G1 F600 E-120\nM5001 P7\nG92 E0\nM18\nM5001 P9\n"
 #define CUSTOM_2_LABEL "Release SD Card"
 #define CUSTOM_2_GCODE "M22\n"
 #define CUSTOM_3_LABEL "Enable Leveling State"
